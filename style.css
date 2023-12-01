@@ -310,7 +310,7 @@ nav .navigation ul li a:hover {
 }
 
 
-#registration .form a.yellow {
+#registration .form .yellow {
   text-decoration: none;
   font-size: 0.9rem;
   padding: 15px 30px;
@@ -323,7 +323,7 @@ nav .navigation ul li a:hover {
 
 }
 
-#registration .form a.yellow:hover {
+#registration .form .yellow:hover {
   color: rgb(228, 228, 102);
   background-color: white;
 
@@ -522,25 +522,27 @@ footer .subscribe {
 footer input {
   width: 220px;
   padding: 15px 12px;
-  background-color: gray;
+  background-color: rgb(255, 248, 248);
   border: none;
   outline: none;
   color: white;
 }
 
-footer .subscribe a {
+footer .subscribe {
   text-decoration: none;
   font-size: 0.9rem;
   padding: 12px 15px;
-  background-color: aquamarine;
+  background-color: rgb(255, 204, 127);
   font-weight: 600;
 
 
 }
 
-footer .subscribe a.yellow {
+footer .subscribe .yellow {
   color: white;
-  background-color: rgb(212, 212, 84);
+  border: none;
+  padding: 13px 7px;
+  background-color: rgb(139, 118, 179);
   transition: o.3s ease;
 
 }

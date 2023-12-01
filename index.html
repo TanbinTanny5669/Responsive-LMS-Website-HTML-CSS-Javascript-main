@@ -243,18 +243,24 @@
             </div>
 
         </div>
-        <div class="form">
+
+
+        <form id='registrationForm' class="form" onsubmit="validateForm(event)">
             <h3>Create Free Account Now!</h3>
-            <input type="text" placeholder="Name">
-            <input type="text" placeholder="Email Address">
-            <input type="text" placeholder="Phone Number">
-            <div class="btn">
-                <a class="yellow" href="#"> Submit Form</a>
 
-            </div>
+            <input type="text" id="username" placeholder="Name">
+
+            <input type="text" id="email" placeholder="Email Address">
+            <input type="password" id="password" placeholder="Password">
+
+            <input class="yellow" type="submit" value="Register">
 
 
-        </div>
+        </form>
+
+
+
+
 
     </section>
 
@@ -357,11 +363,11 @@
         <div class="footer-col">
             <h3>Newsletter</h3>
             <p>You can trust us,we only send promo offers</p>
-            <div class="subscribe">
-                <input type="text" placeholder="Your Email Address">
-                <a href="#" class="yellow">SUBSCRIBE</a>
-
-            </div>
+            <form id="subscriptionForm" class='subscribe' onsubmit="subscribe(event)">
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <button class="yellow" type="submit">Subscribe</button>
+            </form>
+            <p id="subscriptionMessage"></p>
 
         </div>
         <div class="copyright">
@@ -375,13 +381,63 @@
             </div>
         </div>
     </footer>
-
-
     <script>
+        function validateForm(event) {
+            event.preventDefault(); // Prevent form submission if validation fails
 
-            // Navaigation Bar
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (username === '') {
+                alert('Please enter a username');
+                return;
+            }
+
+            if (email === '') {
+                alert('Please enter an email');
+                return;
+            }
+
+            // A basic email format validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            if (password === '') {
+                alert('Please enter a password');
+                return;
+            }
+
+            // Password length validation (minimum 6 characters)
+            if (password.length < 6) {
+                alert('Password should be at least 6 characters long');
+                return;
+            }
+
+
+            alert('Registration successful!');
+
+        }
+
+        //footer form
+        function subscribe(event) {
+            event.preventDefault(); // Prevent form submission if validation fails
+
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value.trim();
+
+
+            // For this example, just displaying a success message
+            document.getElementById('subscriptionMessage').textContent = `Subscription successful for: ${email}`;
+            emailInput.value = ''; // Clear the input field after successful subscription
+        }
+
 
     </script>
+
 
 
 </body>

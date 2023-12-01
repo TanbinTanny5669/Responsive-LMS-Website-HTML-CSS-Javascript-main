@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Footer Subscription</title>
+    <script src="subscription.js" defer></script>
+</head>
+
+<body>
+    <footer>
+        <h2>Subscribe to Our Newsletter</h2>
+        <form id="subscriptionForm" onsubmit="subscribe(event)">
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <p id="subscriptionMessage"></p>
+    </footer>
+</body>
+<script>
+    function subscribe(event) {
+        event.preventDefault(); // Prevent form submission if validation fails
+
+        const emailInput = document.getElementById('email');
+        const email = emailInput.value.trim();
+
+        // A basic email format validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            document.getElementById('subscriptionMessage').textContent = 'Please enter a valid email address';
+            return;
+        }
+
+        // Simulating subscription success (you can modify this part to connect to a backend)
+        // For this example, just displaying a success message
+        document.getElementById('subscriptionMessage').textContent = `Subscription successful for: ${email}`;
+        emailInput.value = ''; // Clear the input field after successful subscription
+    }
+
+</script>
+
+</html>
