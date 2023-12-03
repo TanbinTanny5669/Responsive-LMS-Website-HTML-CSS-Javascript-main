@@ -285,11 +285,11 @@
         <div class="footer-col">
             <h3>Newsletter</h3>
             <p>You can trust us,we only send promo offers</p>
-            <div class="subscribe">
-                <input type="text" placeholder="Your Email Address">
-                <a href="#" class="yellow">SUBSCRIBE</a>
-
-            </div>
+            <form id="subscriptionForm" class='subscribe' onsubmit="subscribe(event)">
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <button class="yellow" type="submit">Subscribe</button>
+            </form>
+            <p id="subscriptionMessage"></p>
 
         </div>
         <div class="copyright">
@@ -308,7 +308,18 @@
 
     <script>
 
-            // Navaigation Bar
+        //footer form
+        function subscribe(event) {
+            event.preventDefault(); // Prevent form submission if validation fails
+
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value.trim();
+
+
+            // For this example, just displaying a success message
+            document.getElementById('subscriptionMessage').textContent = `Subscription successful for: ${email}`;
+            emailInput.value = ''; // Clear the input field after successful subscription
+        }
 
     </script>
 

@@ -3,39 +3,81 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Footer Subscription</title>
-    <script src="subscription.js" defer></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 
 <body>
-    <footer>
-        <h2>Subscribe to Our Newsletter</h2>
-        <form id="subscriptionForm" onsubmit="subscribe(event)">
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            <button type="submit">Subscribe</button>
-        </form>
-        <p id="subscriptionMessage"></p>
-    </footer>
+    <form id="contactForm">
+
+        <input type="text" id="name" name="name"><br><br>
+
+
+        <input type="email" id="email" name="email"><br><br>
+
+
+
+
+        <input type="text" id="subject" name="subject"><br><br>
+
+
+        <textarea id="message" name="message"></textarea><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="errorMessages"></div>
+
+
 </body>
 <script>
-    function subscribe(event) {
-        event.preventDefault(); // Prevent form submission if validation fails
+    document.getElementById('contactForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the form from submitting by default
 
-        const emailInput = document.getElementById('email');
-        const email = emailInput.value.trim();
+        // Get form field values
+        var name = document.getElementById('name').value.trim();
+        var email = document.getElementById('email').value.trim();
 
-        // A basic email format validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            document.getElementById('subscriptionMessage').textContent = 'Please enter a valid email address';
-            return;
+        var subject = document.getElementById('subject').value.trim();
+        var message = document.getElementById('message').value.trim();
+
+        // Validation checks
+        var errorMessages = "";
+
+        if (name === '') {
+            errorMessages += "Please enter your name.<br>";
         }
 
-        // Simulating subscription success (you can modify this part to connect to a backend)
-        // For this example, just displaying a success message
-        document.getElementById('subscriptionMessage').textContent = `Subscription successful for: ${email}`;
-        emailInput.value = ''; // Clear the input field after successful subscription
-    }
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.match(emailPattern)) {
+            errorMessages += "Please enter a valid email address.<br>";
+        }
+
+
+
+        if (subject === '') {
+            errorMessages += "Please enter a subject.<br>";
+        }
+
+        if (message === '') {
+            errorMessages += "Please enter a message.<br>";
+        }
+
+        var errorDiv = document.getElementById('errorMessages');
+        if (errorMessages !== '') {
+            errorDiv.innerHTML = errorMessages;
+        } else {
+            errorDiv.innerHTML = ''; // Clear previous error messages
+            // Submit the form (you can place your submission logic here)
+            alert('Form submitted successfully!');
+            // You might want to submit the form using AJAX or send it to a server
+            // this.submit();
+        }
+    });
+
+
+
 
 </script>
 

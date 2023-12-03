@@ -25,7 +25,7 @@
         <div class="navigation">
             <ul>
                 <i id="menu-close" class="fas fa-times"></i>
-                <li><a href="#">Home</a> </li>
+                <li><a href="home.html">Home</a> </li>
                 <li><a href="about.html">About</a> </li>
                 <li><a href="blog.html">Blogs </a> </li>
                 <li><a href="course.html">Courses</a> </li>
@@ -74,28 +74,30 @@
 
             </div>
         </div>
-        <div class="form">
+
+        <form class="form" id="contactForm">
             <h4>Let's Connect</h4>
             <p>contact if you need any help</p>
             <div class="form-row">
-                <input type="text" placeholder="Your Name">
-                <input type="text" placeholder="Email">
+                <input type="text" id="name" placeholder="Your Name">
+                <input type="text" id="email" placeholder="Email">
 
             </div>
             <div class="form-col">
-                <input type="text" placeholder="Subject">
+                <input type="text" id="subject" placeholder="Subject">
 
             </div>
             <div class="form-col">
-                <textarea name="" id="" cols="30" rows="8" placeholder="How can we help?"></textarea>
+                <textarea name="" id="message" cols="30" rows="8" placeholder="How can we help?"></textarea>
 
             </div>
             <div class="form-col">
-                <button>Send Message</button>
+                <input type="submit" value="Submit">
 
             </div>
 
-        </div>
+        </form>
+        <div id="errorMessages"></div>
 
     </section>
 
@@ -151,11 +153,11 @@
         <div class="footer-col">
             <h3>Newsletter</h3>
             <p>You can trust us,we only send promo offers</p>
-            <div class="subscribe">
-                <input type="text" placeholder="Your Email Address">
-                <a href="#" class="yellow">SUBSCRIBE</a>
-
-            </div>
+            <form id="subscriptionForm" class='subscribe' onsubmit="subscribe(event)">
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <button class="yellow" type="submit">Subscribe</button>
+            </form>
+            <p id="subscriptionMessage"></p>
 
         </div>
         <div class="copyright">
@@ -173,8 +175,64 @@
 
 
     <script>
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the form from submitting by default
 
-            // Navaigation Bar
+            // Get form field values
+            var name = document.getElementById('name').value.trim();
+            var email = document.getElementById('email').value.trim();
+
+            var subject = document.getElementById('subject').value.trim();
+            var message = document.getElementById('message').value.trim();
+
+            // Validation checks
+            var errorMessages = "";
+
+            if (name === '') {
+                errorMessages += "Please enter your name.<br>";
+            }
+
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.match(emailPattern)) {
+                errorMessages += "Please enter a valid email address.<br>";
+            }
+
+
+
+            if (subject === '') {
+                errorMessages += "Please enter a subject.<br>";
+            }
+
+            if (message === '') {
+                errorMessages += "Please enter a message.<br>";
+            }
+
+            var errorDiv = document.getElementById('errorMessages');
+            if (errorMessages !== '') {
+                errorDiv.innerHTML = errorMessages;
+            } else {
+                errorDiv.innerHTML = ''; // Clear previous error messages
+                // Submit the form (you can place your submission logic here)
+                alert('Form submitted successfully!');
+                // You might want to submit the form using AJAX or send it to a server
+                // this.submit();
+            }
+        });
+        // footer
+        function subscribe(event) {
+            event.preventDefault(); // Prevent form submission if validation fails
+
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value.trim();
+
+
+            // For this example, just displaying a success message
+            document.getElementById('subscriptionMessage').textContent = `Subscription successful for: ${email}`;
+            emailInput.value = ''; // Clear the input field after successful subscription
+        }
+
+
+
 
     </script>
 
